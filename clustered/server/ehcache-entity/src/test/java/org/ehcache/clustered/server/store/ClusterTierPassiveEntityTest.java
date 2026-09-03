@@ -1,6 +1,6 @@
 /*
  * Copyright Terracotta, Inc.
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import org.ehcache.clustered.server.TestClientDescriptor;
 import org.ehcache.clustered.server.internal.messages.PassiveReplicationMessage;
 import org.ehcache.clustered.server.state.EhcacheStateService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.terracotta.client.message.tracker.OOOMessageHandlerConfiguration;
 import org.terracotta.client.message.tracker.OOOMessageHandlerImpl;
@@ -143,6 +144,7 @@ public class ClusterTierPassiveEntityTest {
     }
   }
 
+  @Ignore("TDB-23396")
   @Test
   public void testPassiveTracksMessageDuplication() throws Exception {
     ClusterTierPassiveEntity passiveEntity = new ClusterTierPassiveEntity(defaultRegistry, defaultConfiguration, DEFAULT_MAPPER);

@@ -34,6 +34,15 @@ public class CheckstyleConvention implements Plugin<Project> {
         subs.substitute(subs.module("org.apache.httpcomponents:httpcore:4.4.13"))
           .using(subs.module("org.apache.httpcomponents:httpcore:4.4.14"))
           .because("Align httpcore to latest bugfix release");
+        subs.substitute(subs.module("org.apache.httpcomponents.core5:httpcore5:5.1.3"))
+          .using(subs.module("org.apache.httpcomponents.core5:httpcore5:5.4.3"))
+          .because("CVE-2026-54399");
+        subs.substitute(subs.module("org.apache.httpcomponents.core5:httpcore5-h2:5.1.3"))
+          .using(subs.module("org.apache.httpcomponents.core5:httpcore5-h2:5.4.3"))
+          .because("CVE-2026-54428");
+        subs.substitute(subs.module("org.apache.httpcomponents.client5:httpclient5:5.1.3"))
+          .using(subs.module("org.apache.httpcomponents.client5:httpclient5:5.6.3"))
+          .because("CVE-2026-54428");
         subs.substitute(subs.module("commons-codec:commons-codec:1.11"))
           .using(subs.module("commons-codec:commons-codec:1.15"))
           .because("Checkstyle transitive dependencies depend on different commons-codec versions");
