@@ -20,6 +20,11 @@ configurations.configureEach {
 
 subprojects {
   apply plugin: 'org.ehcache.build.conventions.war'
+  configurations.configureEach {
+    resolutionStrategy {
+      force "org.slf4j:slf4j-api:${project.property('slf4jVersion')}"
+    }
+  }
 
   dependencies {
     implementation project(':demos')

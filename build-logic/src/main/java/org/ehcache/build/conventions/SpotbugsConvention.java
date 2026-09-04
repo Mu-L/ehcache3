@@ -52,6 +52,9 @@ public class SpotbugsConvention implements Plugin<Project> {
         subs.substitute(subs.module("org.apache.logging.log4j:log4j-core:2.25.2"))
           .using(subs.module("org.apache.logging.log4j:log4j-core:2.25.4"))
           .because("Security vulnerability fix");
+        subs.substitute(subs.module("org.apache.logging.log4j:log4j-api:2.25.4"))
+          .using(subs.module("org.apache.logging.log4j:log4j-api:2.25.5"))
+          .because("CVE-2026-49844");
       });
     });
 

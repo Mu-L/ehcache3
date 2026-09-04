@@ -126,44 +126,7 @@ public class ClusterTierPassiveEntity implements PassiveServerEntity<EhcacheEnti
 
   @Override
   public void invokePassive(InvokeContext context, EhcacheEntityMessage message) throws EntityUserException {
-    InvokeContext realContext = context;
-    // For ChainReplicationMessage, we need to recreate the real client context from the one stored in the message. Because the current
-    // context comes from the active message. That's not what we want. So instead we recreate a new context using the original client
-    // id and transaction id stored in the message
-    if (message instanceof ChainReplicationMessage) {
-      realContext = new InvokeContext() {
-        @Override
-        public ClientSourceId getClientSource() {
-          return context.makeClientSourceId(((ChainReplicationMessage) message).getClientId());
-        }
-
-        @Override
-        public long getCurrentTransactionId() {
-          return ((ChainReplicationMessage) message).getTransactionId();
-        }
-
-        @Override
-        public long getOldestTransactionId() {
-          return ((ChainReplicationMessage)message).getOldestTransactionId();
-        }
-
-        @Override
-        public boolean isValidClientInformation() {
-          return true;
-        }
-
-        @Override
-        public ClientSourceId makeClientSourceId(long l) {
-          return context.makeClientSourceId(l);
-        }
-
-        @Override
-        public int getConcurrencyKey() {
-          return context.getConcurrencyKey();
-        }
-      };
-    }
-    messageHandler.invoke(realContext, message, this::invokePassiveInternal);
+    messageHandler.invoke(context, message, this::invokePassiveInternal);
   }
 
   @SuppressWarnings("try")

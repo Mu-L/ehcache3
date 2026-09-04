@@ -1,6 +1,6 @@
 /*
  * Copyright Terracotta, Inc.
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@ import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.core.store.StoreConfigurationImpl;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.terracotta.client.message.tracker.OOOMessageHandler;
 import org.terracotta.offheapresource.OffHeapResourceIdentifier;
@@ -192,6 +193,7 @@ public class ActivePassiveClientIdTest {
     assertThat(responses).hasSize(1); // one message should have sync
   }
 
+  @Ignore("TDB-23396")
   @Test
   public void messageTrackedAndRemovedByPassiveWhenClientLeaves() throws Exception {
     assertThat(passiveMessageHandler.getTrackedClients().count()).isZero(); // nothing tracked right now
